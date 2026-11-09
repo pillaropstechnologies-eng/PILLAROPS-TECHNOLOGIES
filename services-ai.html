@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Solutions for Oil & Gas Companies | PillarOps</title>
+  <meta name="description" content="PillarOps AI solutions bring predictive maintenance, production forecasting, and anomaly detection to oil and gas operations — powered by cloud-based machine learning.">
+  <meta name="keywords" content="AI in oil and gas, predictive maintenance software, AI production forecasting, machine learning energy sector, anomaly detection oil and gas, generative AI energy reporting">
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PillarOps AI & Advanced Analytics",
+    "applicationCategory": "AnalyticsApplication",
+    "operatingSystem": "Cloud, Web, iOS, Android",
+    "offers": {
+      "@type": "Offer",
+      "price": "Custom",
+      "priceCurrency": "USD"
+    },
+    "description": "Native artificial intelligence and machine learning layer for predictive maintenance, production forecasting, and operational anomaly detection."
+  }
+  </script>
+
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    .ai-features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 48px;
+    }
+    .ai-feature-card {
+      background: var(--white);
+      border: 1px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 36px 30px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+    }
+    .ai-feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+      border-color: #CBD5E1;
+    }
+    .ai-icon-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: #E0F2FE;
+      color: #0284C7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .ai-feature-card h3 {
+      font-size: 20px;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+    .ai-feature-card p {
+      font-size: 14px;
+      color: var(--grey);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* How It Works Box */
+    .how-it-works-banner {
+      background: linear-gradient(135deg, #09172E 0%, #0D254C 100%);
+      color: var(--white);
+      padding: 56px;
+      border-radius: 20px;
+      border: 1.5px solid rgba(56, 189, 248, 0.25);
+      margin-top: 80px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    @media (max-width: 980px) {
+      .ai-features-grid {
+        grid-template-columns: 1fr;
+      }
+      .how-it-works-banner {
+        grid-template-columns: 1fr;
+        padding: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a href="index.html" class="brand">
+      <img src="assets/pillarops-logo.png" alt="PillarOps Technologies Private Limited">
+    </a>
+    <ul class="navlinks" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      
+      <!-- Services Dropdown -->
+      <li class="nav-item-has-dropdown">
+        <a href="services.html" class="nav-dropdown-toggle active">
+          Services
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </a>
+        <div class="nav-dropdown-menu">
+          <a href="services.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-overview">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Services Overview</h6>
+              <p>Full suite of energy & operations software</p>
+            </div>
+          </a>
+          <a href="services-hrms.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-hrms">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>HRMS Software</h6>
+              <p>Rosters, crew payroll & certifications</p>
+            </div>
+          </a>
+          <a href="services-crm.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-crm">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>CRM & Vendor Portal</h6>
+              <p>B2B pipeline, tenders & contracts</p>
+            </div>
+          </a>
+          <a href="services-reporting.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-reporting">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><path d="M4 20h16"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Reporting & Analytics</h6>
+              <p>Field data capture & regulatory filings</p>
+            </div>
+          </a>
+          <a href="services-accounts.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-accounts">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Accounts & Finance</h6>
+              <p>Revenue splits, JIB & cost tracking</p>
+            </div>
+          </a>
+          <a href="services-cloud.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-cloud">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Cloud Solutions</h6>
+              <p>Scalable cloud infrastructure & APIs</p>
+            </div>
+          </a>
+          <a href="services-ai.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-ai">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>AI & Advanced Analytics</h6>
+              <p>Predictive maintenance & forecasting</p>
+            </div>
+          </a>
+        </div>
+      </li>
+
+      <!-- Solutions Dropdown -->
+      <li class="nav-item-has-dropdown">
+        <a href="solutions.html" class="nav-dropdown-toggle">
+          Solutions
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </a>
+        <div class="nav-dropdown-menu">
+          <a href="solutions-oil-gas.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-oil">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Oil & Gas Upstream</h6>
+              <p>Allocation, field capture & compliance</p>
+            </div>
+          </a>
+          <a href="manufacturing.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-mfg">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Manufacturing</h6>
+              <p>OEE tracking, checklists & plant logs</p>
+            </div>
+          </a>
+          <a href="solutions.html#construction" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-const">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Construction & Site</h6>
+              <p>Subcontractor logs & safety inspections</p>
+            </div>
+          </a>
+          <a href="solutions.html#healthcare" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-health">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Healthcare Compliance</h6>
+              <p>Sterilization logs & clinical audits</p>
+            </div>
+          </a>
+          <a href="solutions.html#government" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-govt">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Government & Municipal</h6>
+              <p>Asset audits & public facility logs</p>
+            </div>
+          </a>
+        </div>
+      </li>
+
+      <li><a href="why-pillarops.html">Why PillarOps</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="careers.html">Careers</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="contact.html" class="btn-ghost">Contact Sales</a>
+      <a href="contact.html" class="btn btn-primary">Book a Demo</a>
+    </div>
+    <button class="menu-toggle" aria-label="Toggle Navigation" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+</header>
+
+<main>
+  <!-- Hero Section -->
+  <section class="subpage-hero" style="background:var(--white); padding:80px 0 48px; border-bottom:1px solid #E7EAF0;">
+    <div class="wrap">
+      <p class="eyebrow left" style="color:#0284C7; font-weight:700;">— Native Machine Learning & Foresight —</p>
+      <h1 style="font-size:clamp(32px, 4.5vw, 48px); margin-bottom:18px;">AI That Works as Hard as Your Field Teams Do</h1>
+      <p class="lead" style="max-width:780px; font-size:17.5px; color:var(--grey); line-height:1.65;">Every module on the PillarOps platform generates data — field readings, maintenance logs, financial records, production volumes. Our AI & Advanced Analytics layer turns that data into foresight: catching problems before they happen, forecasting outcomes before they're locked in, and automating the manual analysis your teams shouldn't have to do by hand.</p>
+      <div style="margin-top:28px; display:flex; gap:16px; flex-wrap:wrap;">
+        <a href="contact.html?interest=AI" class="btn btn-primary btn-lg">See AI Solutions in Action</a>
+        <a href="services.html" class="btn btn-outline" style="color:var(--navy); border-color:#CBD2E1;">&larr; All Services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Key Features Grid -->
+  <section class="section" style="padding:80px 0;">
+    <div class="wrap">
+      <div class="section-head reveal" style="text-align:center; max-width:800px; margin:0 auto 48px auto;">
+        <p class="eyebrow left" style="display:inline-block; margin-bottom:10px; color:#0284C7; font-weight:700;">— Intelligent Operational Capabilities —</p>
+        <h2 style="font-size:36px;">7 Native AI Capabilities Across PillarOps</h2>
+        <p>Built directly into the core platform data layer — no third-party integrations or manual data exports required.</p>
+      </div>
+
+      <div class="ai-features-grid">
+        
+        <!-- 1. Predictive Maintenance -->
+        <div class="ai-feature-card reveal">
+          <div class="ai-icon-badge">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <h3>Predictive Maintenance</h3>
+          <p>Machine learning models flag downhole pumps, compressors, and pipeline valves likely to fail based on historical runtimes, pressure trends, and temperature logs.</p>
+        </div>
+
+        <!-- 2. AI Production Forecasting -->
+        <div class="ai-feature-card reveal">
+          <div class="ai-icon-badge" style="background:#E5FDF6; color:#047857;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          </div>
+          <h3>AI Production Forecasting</h3>
+          <p>Forecast well, battery, and field output using machine learning algorithms trained on historical flow rates, choke changes, and reservoir decline dynamics.</p>
+        </div>
+
+        <!-- 3. Anomaly Detection -->
+        <div class="ai-feature-card reveal">
+          <div class="ai-icon-badge" style="background:#FFF0EA; color:var(--orange);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <h3>Anomaly Detection</h3>
+          <p>Automatically detect abnormal spikes or drops in daily meter readings, casing pressures, or separator temperatures before they trigger HSE incidents or spills.</p>
+        </div>
+
+        <!-- 4. Smart Allocation Assistance -->
+        <div class="ai-feature-card reveal">
+          <div class="ai-icon-badge" style="background:#FFF8E1; color:#D97706;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <h3>Smart Allocation Assistance</h3>
+          <p>AI-driven mathematical verification on complex commingled allocation splits, catching ownership discrepancies and meter variances before statements reach partners.</p>
+        </div>
+
+        <!-- 5. Natural-Language Reporting -->
+        <div class="ai-feature-card reveal">
+          <div class="ai-icon-badge" style="background:#F5F0FF; color:#7C3AED;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3>Natural-Language Assistant</h3>
+          <p>Ask questions about field logs and financial metrics in plain English: "Show wells with >10% decline this month" and get instant graphs and drafted reports.</p>
+        </div>
+
+        <!-- 6. Document Intelligence -->
+        <div class="ai-feature-card reveal">
+          <div class="ai-icon-badge" style="background:#EAF0FF; color:var(--blue);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <h3>Document Intelligence</h3>
+          <p>Automate data extraction and cross-verification from scanned field run tickets, contractor invoices, regulatory PDF forms, and division order deeds.</p>
+        </div>
+
+        <!-- 7. Automated Insights & Alerts -->
+        <div class="ai-feature-card reveal" style="grid-column: span 3;">
+          <div class="ai-icon-badge" style="background:rgba(251, 91, 8, 0.1); color:var(--orange);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </div>
+          <h3>Automated Insights & Multi-Channel Alerts</h3>
+          <p>Proactive push notifications and SMS dispatches sent to operations superintendents, pumpers, and accounting leads when critical metrics deviate from statistical baselines.</p>
+        </div>
+
+      </div>
+
+      <!-- How It Works Banner -->
+      <div class="how-it-works-banner reveal">
+        <div>
+          <span class="industry-pill" style="margin-bottom:12px; display:inline-block;">Native Intelligence</span>
+          <h3 style="font-size:30px; margin-bottom:16px; color:var(--white);">How AI Works Inside PillarOps</h3>
+          <p style="color:#C9D3EA; font-size:15px; line-height:1.7;">AI & Advanced Analytics runs on top of your existing PillarOps data — no separate data pipeline or manual exports required. As HRMS, CRM, Reporting, and Accounts modules collect information, the AI layer continuously analyzes it and surfaces insights directly inside your dashboards.</p>
+        </div>
+        <div style="background:rgba(255, 255, 255, 0.05); border:1px solid rgba(255, 255, 255, 0.15); border-radius:12px; padding:28px;">
+          <h4 style="font-size:18px; color:var(--white); margin-bottom:14px;">Key Operational Outcomes:</h4>
+          <ul style="display:flex; flex-direction:column; gap:10px; color:#9FB3E8; font-size:13.5px;">
+            <li><strong style="color:#047857;">✓</strong> Shift from reactive fire-fighting to predictive uptime</li>
+            <li><strong style="color:#047857;">✓</strong> Improve reservoir forecasting accuracy by up to 25%</li>
+            <li><strong style="color:#047857;">✓</strong> Eliminate human data errors before submitting regulatory filings</li>
+            <li><strong style="color:#047857;">✓</strong> Built-in capability without buying disconnected AI tools</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA Band -->
+  <section class="cta-band">
+    <div class="wrap">
+      <h2>Empower your teams with predictive foresight</h2>
+      <p>Explore a live demo of PillarOps AI & Advanced Analytics using real energy operational datasets.</p>
+      <a href="contact.html?interest=AI" class="btn btn-primary btn-lg">See AI Solutions in Action</a>
+    </div>
+  </section>
+</main>
+
+<footer id="company">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <img src="assets/pillarops-logo.png" alt="PillarOps Technologies Private Limited">
+        <p style="margin-bottom:20px; font-size:14px; line-height:1.6;">PillarOps Technologies Private Limited builds cloud-based HRMS, CRM, reporting, and accounting software for oil & gas companies and operational enterprises worldwide.</p>
+        <div class="foot-subscribe">
+          <p>Subscribe to operational updates & insights</p>
+          <form class="foot-subscribe-form" onsubmit="handleSubscribeSubmit(event)">
+            <input type="email" class="clip-sm" placeholder="Enter your work email" required id="subEmail">
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+          <div id="subSuccess" style="display:none; color:#39D353; font-size:12.5px; margin-top:8px; font-weight:600;">✓ Subscribed successfully!</div>
+        </div>
+      </div>
+
+      <div class="foot-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="services.html">Services Overview</a></li>
+          <li><a href="services-hrms.html">HRMS Software</a></li>
+          <li><a href="services-crm.html">CRM & Vendor Portal</a></li>
+          <li><a href="services-reporting.html">Reporting & Compliance</a></li>
+          <li><a href="services-accounts.html">Accounts & Finance</a></li>
+          <li><a href="services-cloud.html">Cloud Solutions</a></li>
+          <li><a href="services-ai.html">AI & Advanced Analytics</a></li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h5>Solutions</h5>
+        <ul>
+          <li><a href="solutions-oil-gas.html">Oil & Gas Upstream</a></li>
+          <li><a href="manufacturing.html">Manufacturing</a></li>
+          <li><a href="solutions.html#construction">Construction</a></li>
+          <li><a href="solutions.html#healthcare">Healthcare Compliance</a></li>
+          <li><a href="solutions.html#government">Government Sector</a></li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="why-pillarops.html">Why PillarOps</a></li>
+          <li><a href="resources.html">Resources & Blog</a></li>
+          <li><a href="pricing.html">Pricing & Plans</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 PillarOps Technologies Private Limited. All rights reserved.</span>
+      <span>PillarOps Technologies Private Limited · Global Enterprise Delivery · info@pillarops.com · +91 9080887340</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { 
+      if (e.isIntersecting) { 
+        e.target.classList.add('in'); 
+        io.unobserve(e.target); 
+      } 
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+
+  document.querySelectorAll('.nav-item-has-dropdown').forEach(item => {
+    item.addEventListener('click', (e) => {
+      if (window.innerWidth <= 980) {
+        if (e.target.closest('.nav-dropdown-toggle')) {
+          e.preventDefault();
+          item.classList.toggle('mobile-open');
+        }
+      }
+    });
+  });
+
+  function handleSubscribeSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const successMsg = document.getElementById('subSuccess');
+    form.style.display = 'none';
+    successMsg.style.display = 'block';
+  }
+</script>
+
+</body>
+</html>

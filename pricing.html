@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PillarOps Technologies Private Limited — Pricing & Plans</title>
+  <meta name="description" content="Transparent, scalable pricing from PillarOps Technologies Private Limited for plants, fields, and enterprises. Calculate your costs and find the plan that fits your operation.">
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    /* Custom styles for pricing page */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 48px;
+    }
+    .price-card {
+      background: var(--white);
+      border: 1px solid #E7EAF0;
+      padding: 48px 36px 36px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    }
+    .price-card.popular {
+      border-color: var(--orange);
+      box-shadow: var(--shadow-md);
+    }
+    .price-card.popular::before {
+      content: "Most Popular";
+      position: absolute;
+      top: 18px;
+      right: 24px;
+      background: var(--orange);
+      color: var(--white);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+    }
+    .price-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+    .price-card h3 {
+      font-size: 22px;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .price-card p.desc {
+      font-size: 14.5px;
+      color: var(--grey);
+      margin-bottom: 30px;
+      line-height: 1.5;
+    }
+    .price-amount {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      margin-bottom: 30px;
+    }
+    .price-val {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 52px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .price-unit {
+      font-size: 15px;
+      color: var(--grey);
+      font-weight: 500;
+    }
+    .price-features {
+      margin-bottom: 40px;
+      border-top: 1px solid #E7EAF0;
+      padding-top: 30px;
+    }
+    .price-features li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-size: 14.5px;
+      color: var(--navy-soft);
+      font-weight: 500;
+    }
+    .price-features svg {
+      color: var(--blue);
+      flex-shrink: 0;
+    }
+    .price-card .btn {
+      margin-top: auto;
+      width: 100%;
+    }
+
+    /* Calculator Widget styling */
+    .calc-container {
+      background: var(--navy-soft);
+      color: var(--white);
+      padding: 56px;
+      margin-top: 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .calc-left h3 {
+      font-size: 28px;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .calc-left p {
+      color: #9FB3E8;
+      font-size: 15.5px;
+      line-height: 1.65;
+    }
+    .calc-widget {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+      padding: 38px;
+    }
+    .calc-row {
+      margin-bottom: 24px;
+    }
+    .calc-row label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      display: block;
+      margin-bottom: 10px;
+      color: #C9D3EA;
+    }
+    .range-display {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 22px;
+      color: var(--orange);
+      font-weight: 600;
+      margin-left: 10px;
+    }
+    input[type="range"] {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      background: var(--orange);
+      cursor: pointer;
+      clip-path: polygon(5px 0, 100% 0, 100% 100%, 0 100%, 0 5px);
+    }
+    .calc-select {
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--navy);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--white);
+      font-family: inherit;
+      font-size: 14.5px;
+      outline: none;
+    }
+    .calc-result {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .calc-total {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 38px;
+      color: var(--orange);
+      font-weight: 700;
+    }
+
+    /* Comparison Table Styling */
+    .compare-section {
+      margin-top: 96px;
+    }
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 40px;
+      text-align: left;
+    }
+    .compare-table th, .compare-table td {
+      padding: 16px 20px;
+      border-bottom: 1px solid #E7EAF0;
+    }
+    .compare-table th {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy);
+      background: var(--fog);
+    }
+    .compare-table td {
+      font-size: 14.5px;
+      color: var(--navy-soft);
+    }
+    .compare-table tr:hover td {
+      background: rgba(244, 246, 249, 0.4);
+    }
+    .check-icon {
+      color: var(--blue);
+      font-weight: bold;
+    }
+
+    /* Contact Form Styling */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      font-size: 14px;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 8px;
+      color: var(--navy-soft);
+    }
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--white);
+      border: 1px solid #CBD2E1;
+      color: var(--navy);
+      font-family: inherit;
+      font-size: 14.5px;
+      transition: border-color var(--transition-fast);
+    }
+    .form-control:focus {
+      border-color: var(--orange);
+      outline: none;
+    }
+    .success-msg {
+      display: none;
+      padding: 20px;
+      background: #EAF0FF;
+      color: var(--blue);
+      font-weight: 600;
+      border-left: 4px solid var(--blue);
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 980px) {
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+      .calc-container {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 32px;
+      }
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a href="index.html" class="brand">
+      <img src="assets/pillarops-logo.png" alt="PillarOps Technologies Private Limited">
+    </a>
+    <ul class="navlinks" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      
+      <!-- Services Dropdown -->
+      <li class="nav-item-has-dropdown">
+        <a href="services.html" class="nav-dropdown-toggle">
+          Services
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </a>
+        <div class="nav-dropdown-menu">
+          <a href="services.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-overview">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Services Overview</h6>
+              <p>Full suite of energy & operations software</p>
+            </div>
+          </a>
+          <a href="services-hrms.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-hrms">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>HRMS Software</h6>
+              <p>Rosters, crew payroll & certifications</p>
+            </div>
+          </a>
+          <a href="services-crm.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-crm">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>CRM & Vendor Portal</h6>
+              <p>B2B pipeline, tenders & contracts</p>
+            </div>
+          </a>
+          <a href="services-reporting.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-reporting">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><path d="M4 20h16"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Reporting & Analytics</h6>
+              <p>Field data capture & regulatory filings</p>
+            </div>
+          </a>
+          <a href="services-accounts.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-accounts">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Accounts & Finance</h6>
+              <p>Revenue splits, JIB & cost tracking</p>
+            </div>
+          </a>
+          <a href="services-cloud.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-cloud">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Cloud Solutions</h6>
+              <p>Scalable cloud infrastructure & APIs</p>
+            </div>
+          </a>
+          <a href="services-ai.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-ai">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>AI & Advanced Analytics</h6>
+              <p>Predictive maintenance & forecasting</p>
+            </div>
+          </a>
+        </div>
+      </li>
+
+      <!-- Solutions Dropdown -->
+      <li class="nav-item-has-dropdown">
+        <a href="solutions.html" class="nav-dropdown-toggle">
+          Solutions
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </a>
+        <div class="nav-dropdown-menu">
+          <a href="solutions-oil-gas.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-oil">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Oil & Gas Upstream</h6>
+              <p>Allocation, field capture & compliance</p>
+            </div>
+          </a>
+          <a href="manufacturing.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-mfg">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Manufacturing</h6>
+              <p>OEE tracking, checklists & plant logs</p>
+            </div>
+          </a>
+          <a href="solutions.html#construction" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-const">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Construction & Site</h6>
+              <p>Subcontractor logs & safety inspections</p>
+            </div>
+          </a>
+          <a href="solutions.html#healthcare" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-health">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Healthcare Compliance</h6>
+              <p>Sterilization logs & clinical audits</p>
+            </div>
+          </a>
+          <a href="solutions.html#government" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-govt">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Government & Municipal</h6>
+              <p>Asset audits & public facility logs</p>
+            </div>
+          </a>
+        </div>
+      </li>
+
+      <li><a href="why-pillarops.html">Why PillarOps</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="pricing.html" class="active">Pricing</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="careers.html">Careers</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="contact.html" class="btn-ghost">Contact Sales</a>
+      <a href="contact.html" class="btn btn-primary">Book a Demo</a>
+    </div>
+    <button class="menu-toggle" aria-label="Toggle Navigation" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+</header>
+
+<main>
+  <section class="subpage-hero">
+    <div class="wrap">
+      <p class="eyebrow left">— Pricing Plans —</p>
+      <h1>Operational software built for teams of all sizes.</h1>
+      <p class="lead">Transparent, seat-based pricing. Digitize plant workflows without hidden database sync fees or vendor lock-in.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="pricing-grid">
+        
+        <!-- Starter -->
+        <div class="price-card clip reveal">
+          <h3>Starter</h3>
+          <p class="desc">For small operations digitizing checklist-level inspections.</p>
+          <div class="price-amount">
+            <span class="price-val">Custom</span>
+            <span class="price-unit">/ annual contract</span>
+          </div>
+          <ul class="price-features">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Standard mobile capture
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Full offline local caching
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Email customer support
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Standard template library
+            </li>
+          </ul>
+          <a href="#contact" class="btn btn-secondary">Contact Sales</a>
+        </div>
+
+        <!-- Professional -->
+        <div class="price-card popular clip reveal">
+          <h3>Professional</h3>
+          <p class="desc">For growing plants needing automated dispatches and custom dashboards.</p>
+          <div class="price-amount">
+            <span class="price-val">Custom</span>
+            <span class="price-unit">/ annual contract</span>
+          </div>
+          <ul class="price-features">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Advanced workflow logic
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Automated dispatches & alerts
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Shared dynamic dashboard views
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Custom integration templates
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Priority 24/7 support
+            </li>
+          </ul>
+          <a href="#contact" class="btn btn-primary">Contact Sales</a>
+        </div>
+
+        <!-- Enterprise -->
+        <div class="price-card clip reveal">
+          <h3>Enterprise</h3>
+          <p class="desc">For multi-site corporations requiring dedicated sync systems and custom SLAs.</p>
+          <div class="price-amount">
+            <span class="price-val">Custom</span>
+            <span class="price-unit">/ annual contract</span>
+          </div>
+          <ul class="price-features">
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Dedicated server database schemas
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              SSO & strict audit controls
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Custom compliance audit modules
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Design partner templates
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Dedicated Account Manager
+            </li>
+          </ul>
+          <a href="#contact" class="btn btn-secondary">Contact Sales</a>
+        </div>
+
+      </div>
+
+
+
+      <!-- Plan Comparison Table -->
+      <div class="compare-section reveal">
+        <div class="section-head" style="margin-bottom: 30px;">
+          <h2>Feature Matrix</h2>
+        </div>
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Features</th>
+              <th>Starter</th>
+              <th>Professional</th>
+              <th>Enterprise</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Offline Local Database Storage</td>
+              <td class="check-icon">✓</td>
+              <td class="check-icon">✓</td>
+              <td class="check-icon">✓</td>
+            </tr>
+            <tr>
+              <td>Mobile App (iOS/Android)</td>
+              <td class="check-icon">✓</td>
+              <td class="check-icon">✓</td>
+              <td class="check-icon">✓</td>
+            </tr>
+            <tr>
+              <td>Standard Checklist Builder</td>
+              <td class="check-icon">✓</td>
+              <td class="check-icon">✓</td>
+              <td class="check-icon">✓</td>
+            </tr>
+            <tr>
+              <td>Automated Notifications & Work Orders</td>
+              <td>—</td>
+              <td class="check-icon">✓</td>
+              <td class="check-icon">✓</td>
+            </tr>
+            <tr>
+              <td>External Database API Sync</td>
+              <td>—</td>
+              <td class="check-icon">✓</td>
+              <td class="check-icon">✓</td>
+            </tr>
+            <tr>
+              <td>Single Sign-On (SSO / SAML)</td>
+              <td>—</td>
+              <td>—</td>
+              <td class="check-icon">✓</td>
+            </tr>
+            <tr>
+              <td>Dedicated Cloud Hosting Option</td>
+              <td>—</td>
+              <td>—</td>
+              <td class="check-icon">✓</td>
+            </tr>
+            <tr>
+              <td>Support Turnaround</td>
+              <td>2-3 Days</td>
+              <td>Priority (24h)</td>
+              <td>Custom SLA</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section bg-fog" id="contact">
+    <div class="wrap contact-grid">
+      <div class="reveal">
+        <div class="divider-bars" aria-hidden="true"><span></span><span></span><span></span></div>
+        <h2 style="font-size:32px; margin-bottom: 18px;">Let's discuss your plant's workflows.</h2>
+        <p style="font-size:16px; line-height: 1.65; margin-bottom: 24px;">Talk with an operations workflow engineer today. We can configure templates matching your plant's layout, compliance guidelines, or ERP connections during a quick 30-minute overview call.</p>
+        <p style="font-size: 14.5px; font-weight: 600; color: var(--navy-soft);">Corporate Email: <a href="mailto:info@pillaropstech.com" style="color:var(--sky-dark); text-decoration:none;">info@pillarops.com</a><br>Client Support: <a href="mailto:sales@pillaropstech.com" style="color:var(--sky-dark); text-decoration:none;">support@pillarops.com</a><br>Phone: <a href="tel:+919080887340" style="color:inherit; text-decoration:none;">+91 9080887340</a></p>
+      </div>
+
+      <div class="reveal">
+        <div class="success-msg clip-sm" id="successMsg">
+          Thank you! An operations workflow engineer will contact you shortly to set up your demo.
+        </div>
+        <form class="checklist-widget clip" id="demoForm" onsubmit="handleFormSubmit(event)">
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" class="form-control clip-sm" id="fullName" required>
+          </div>
+          <div class="form-group">
+            <label for="compEmail">Work Email</label>
+            <input type="email" class="form-control clip-sm" id="compEmail" required>
+          </div>
+          <div class="form-group">
+            <label for="companyName">Company Name</label>
+            <input type="text" class="form-control clip-sm" id="companyName" required>
+          </div>
+          <div class="form-group">
+            <label for="indVertical">Industry Vertical</label>
+            <select class="form-control clip-sm" id="indVertical" required>
+              <option value="oilgas">Oil & Gas / Energy</option>
+              <option value="manufacturing">Manufacturing</option>
+              <option value="construction">Construction</option>
+              <option value="healthcare">Healthcare</option>
+              <option value="government">Government & Municipal</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary" style="margin-top: 14px; width: 100%;">Book Demo & Setup Pilot</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="company">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <img src="assets/pillarops-logo.png" alt="PillarOps Technologies Private Limited">
+        <p style="margin-bottom:20px;">PillarOps Technologies Private Limited helps operations teams capture accurate data, automate what happens next, and see their business clearly — wherever the work happens.</p>
+        <div class="foot-subscribe">
+          <p>Subscribe to operational updates</p>
+          <form class="foot-subscribe-form" onsubmit="handleSubscribeSubmit(event)">
+            <input type="email" class="clip-sm" placeholder="Enter your email" required id="subEmail">
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+          <div id="subSuccess" style="display:none; color:#39D353; font-size:12.5px; margin-top:8px; font-weight:600;">✓ Subscribed successfully!</div>
+        </div>
+      </div>
+      <div class="foot-col" id="product-nav">
+        <h5>Product</h5>
+        <ul>
+          <li><a href="index.html#pillars">PillarOps Platform</a></li>
+          <li><a href="solutions.html">Templates</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="foot-col" id="solutions-nav">
+        <h5>Solutions</h5>
+        <ul>
+          <li><a href="solutions.html">Industry Solutions</a></li>
+          <li><a href="manufacturing.html">Manufacturing</a></li>
+          <li><a href="solutions.html#construction">Construction</a></li>
+          <li><a href="solutions.html#healthcare">Healthcare</a></li>
+          <li><a href="solutions.html#government">Government</a></li>
+        </ul>
+      </div>
+      <div class="foot-col" id="resources-nav">
+        <h5>Resources</h5>
+        <ul>
+          <li><a href="solutions.html">Documentation</a></li>
+          <li><a href="about.html">About Us</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="pricing.html#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 PillarOps Technologies Private Limited. All rights reserved.</span>
+      <span>Corporate Email: <a href="mailto:info@pillaropstech.com">info@pillarops.com</a> · Client Support: <a href="mailto:sales@pillaropstech.com">support@pillarops.com</a> · <a href="tel:+919080887340">+91 9080887340</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- Chatbot Widget -->
+<div class="chat-widget-wrapper">
+  <div class="chat-bubble" id="chatBubble" aria-label="Open chat assistant">
+    <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  </div>
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+      <div class="chat-header-title">
+        <span class="chat-header-status"></span>
+        PillarOps Assistant
+      </div>
+      <div class="chat-close-btn" id="chatCloseBtn">&times;</div>
+    </div>
+    <div class="chat-body" id="chatBody">
+      <div class="chat-msg bot">Hi! Welcome to PillarOps. How can I help you optimize your frontline operations today?</div>
+    </div>
+    <div class="chat-chips" id="chatChips">
+      <button class="chat-chip clip-sm" onclick="sendQuickMessage('Book a Demo')">Book a Demo</button>
+      <button class="chat-chip clip-sm" onclick="sendQuickMessage('Careers')">Careers</button>
+      <button class="chat-chip clip-sm" onclick="sendQuickMessage('Contact Office')">Contact Office</button>
+    </div>
+    <form class="chat-footer" id="chatForm" onsubmit="handleChatSubmit(event)">
+      <input type="text" class="chat-input clip-sm" id="chatInput" placeholder="Type a message..." required autocomplete="off">
+      <button type="submit" class="chat-send-btn clip-sm" aria-label="Send message">
+        <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Intersection Observer for scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { 
+      if (e.isIntersecting) { 
+        e.target.classList.add('in'); 
+        io.unobserve(e.target); 
+      } 
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Responsive Mobile Menu
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+
+  // Close nav menu on link click
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menuToggle.classList.remove('open');
+      navLinks.classList.remove('open');
+    });
+  });
+
+
+
+  // Handle Contact Form Submit
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    const form = document.getElementById('demoForm');
+    const successMsg = document.getElementById('successMsg');
+    
+    form.style.display = 'none';
+    successMsg.style.display = 'block';
+  }
+
+  // Newsletter Subscription Form Logic
+  function handleSubscribeSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const successMsg = document.getElementById('subSuccess');
+    form.style.display = 'none';
+    successMsg.style.display = 'block';
+  }
+
+  // Chatbot Widget Logic
+  const chatBubble = document.getElementById('chatBubble');
+  const chatWindow = document.getElementById('chatWindow');
+  const chatCloseBtn = document.getElementById('chatCloseBtn');
+  const chatBody = document.getElementById('chatBody');
+  const chatInput = document.getElementById('chatInput');
+
+  chatBubble.addEventListener('click', () => {
+    chatWindow.classList.add('open');
+  });
+
+  chatCloseBtn.addEventListener('click', () => {
+    chatWindow.classList.remove('open');
+  });
+
+  function appendChatMessage(sender, text) {
+    const msg = document.createElement('div');
+    msg.classList.add('chat-msg', sender);
+    msg.textContent = text;
+    chatBody.appendChild(msg);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  function handleChatSubmit(e) {
+    e.preventDefault();
+    const text = chatInput.value.trim();
+    if (!text) return;
+    
+    appendChatMessage('user', text);
+    chatInput.value = '';
+    
+    setTimeout(() => {
+      respondToMessage(text);
+    }, 600);
+  }
+
+  function sendQuickMessage(text) {
+    appendChatMessage('user', text);
+    setTimeout(() => {
+      respondToMessage(text);
+    }, 600);
+  }
+
+  function respondToMessage(text) {
+    const cleanText = text.toLowerCase();
+    let reply = "I've received your request! An operations engineer will follow up soon.";
+    
+    if (cleanText.includes('demo') || cleanText.includes('book')) {
+      reply = "Excellent! You can book a demo directly through our form on the Pricing page or email us at info@pillarops.com.";
+    } else if (cleanText.includes('careers') || cleanText.includes('job') || cleanText.includes('hiring')) {
+      reply = "We're hiring! Please check our Careers page (careers.html) for active openings.";
+    } else if (cleanText.includes('contact') || cleanText.includes('address') || cleanText.includes('office') || cleanText.includes('phone') || cleanText.includes('tamil')) {
+      reply = "Our team serves clients globally through remote and enterprise delivery models. Reach us at info@pillarops.com or call +91 9080887340.";
+    }
+    
+    appendChatMessage('bot', reply);
+  }
+</script>
+
+</body>
+</html>

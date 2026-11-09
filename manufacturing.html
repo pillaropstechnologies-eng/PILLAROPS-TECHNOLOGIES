@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PillarOps — Manufacturing Operational Software</title>
+  <meta name="description" content="Digitize checklists, manage OEE, automate maintenance dispatches, and track plant compliance in real-time. Built specifically for manufacturing plants.">
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    /* Custom styles for manufacturing subpage */
+    .mfg-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    /* Flow Mockup Styles */
+    .flow-mockup {
+      background: var(--navy-soft);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      position: relative;
+      color: var(--white);
+    }
+    .flow-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      position: relative;
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    }
+    .flow-step:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .flow-badge {
+      width: 28px;
+      height: 28px;
+      background: var(--orange);
+      color: var(--white);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .flow-step.blue .flow-badge {
+      background: var(--blue);
+    }
+    .flow-text h4 {
+      font-size: 16px;
+      margin-bottom: 6px;
+      color: var(--white);
+    }
+    .flow-text p {
+      font-size: 13.5px;
+      color: #9FB3E8;
+      line-height: 1.5;
+    }
+    /* Interactive Live Checklist Mockup */
+    .checklist-widget {
+      background: var(--white);
+      border: 1px solid #E7EAF0;
+      padding: 32px;
+      box-shadow: var(--shadow-md);
+    }
+    .checklist-title {
+      font-size: 18px;
+      color: var(--navy);
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .checklist-items {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .checklist-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: var(--fog);
+      transition: background var(--transition-fast);
+    }
+    .checklist-row.checked {
+      background: #EAF0FF;
+    }
+    .checklist-checkbox {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--blue);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition-fast);
+      flex-shrink: 0;
+    }
+    .checklist-checkbox::after {
+      content: "✓";
+      color: var(--white);
+      font-size: 12px;
+      display: none;
+    }
+    .checklist-row.checked .checklist-checkbox {
+      background: var(--blue);
+    }
+    .checklist-row.checked .checklist-checkbox::after {
+      display: block;
+    }
+    .checklist-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--navy-soft);
+      cursor: pointer;
+    }
+    .checklist-row.checked .checklist-label {
+      text-decoration: line-through;
+      color: var(--grey);
+    }
+    /* Action trigger display */
+    .action-trigger {
+      margin-top: 20px;
+      padding: 12px 16px;
+      background: #FFE6D5;
+      color: var(--orange-dark);
+      font-size: 13.5px;
+      font-weight: 600;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      border-left: 3px solid var(--orange);
+    }
+
+    @media (max-width: 980px) {
+      .mfg-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a href="index.html" class="brand">
+      <img src="assets/pillarops-logo.png" alt="PillarOps Technologies Private Limited">
+    </a>
+    <ul class="navlinks" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      
+      <!-- Services Dropdown -->
+      <li class="nav-item-has-dropdown">
+        <a href="services.html" class="nav-dropdown-toggle">
+          Services
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </a>
+        <div class="nav-dropdown-menu">
+          <a href="services.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-overview">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Services Overview</h6>
+              <p>Full suite of energy & operations software</p>
+            </div>
+          </a>
+          <a href="services-hrms.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-hrms">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>HRMS Software</h6>
+              <p>Rosters, crew payroll & certifications</p>
+            </div>
+          </a>
+          <a href="services-crm.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-crm">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>CRM & Vendor Portal</h6>
+              <p>B2B pipeline, tenders & contracts</p>
+            </div>
+          </a>
+          <a href="services-reporting.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-reporting">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><path d="M4 20h16"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Reporting & Analytics</h6>
+              <p>Field data capture & regulatory filings</p>
+            </div>
+          </a>
+          <a href="services-accounts.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-accounts">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Accounts & Finance</h6>
+              <p>Revenue splits, JIB & cost tracking</p>
+            </div>
+          </a>
+          <a href="services-cloud.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-cloud">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Cloud Solutions</h6>
+              <p>Scalable cloud infrastructure & APIs</p>
+            </div>
+          </a>
+          <a href="services-ai.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-ai">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>AI & Advanced Analytics</h6>
+              <p>Predictive maintenance & forecasting</p>
+            </div>
+          </a>
+        </div>
+      </li>
+
+      <!-- Solutions Dropdown -->
+      <li class="nav-item-has-dropdown">
+        <a href="solutions.html" class="nav-dropdown-toggle active">
+          Solutions
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </a>
+        <div class="nav-dropdown-menu">
+          <a href="solutions-oil-gas.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-oil">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Oil & Gas Upstream</h6>
+              <p>Allocation, field capture & compliance</p>
+            </div>
+          </a>
+          <a href="manufacturing.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-mfg">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Manufacturing</h6>
+              <p>OEE tracking, checklists & plant logs</p>
+            </div>
+          </a>
+          <a href="solutions.html#construction" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-const">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Construction & Site</h6>
+              <p>Subcontractor logs & safety inspections</p>
+            </div>
+          </a>
+          <a href="solutions.html#healthcare" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-health">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Healthcare Compliance</h6>
+              <p>Sterilization logs & clinical audits</p>
+            </div>
+          </a>
+          <a href="solutions.html#government" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-govt">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Government & Municipal</h6>
+              <p>Asset audits & public facility logs</p>
+            </div>
+          </a>
+        </div>
+      </li>
+
+      <li><a href="why-pillarops.html">Why PillarOps</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="careers.html">Careers</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="contact.html" class="btn-ghost">Contact Sales</a>
+      <a href="contact.html" class="btn btn-primary">Book a Demo</a>
+    </div>
+    <button class="menu-toggle" aria-label="Toggle Navigation" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+</header>
+
+<main>
+  <section class="subpage-hero">
+    <div class="wrap">
+      <p class="eyebrow left">— Industry Vertical —</p>
+      <h1>Operational Software for Manufacturing Plants</h1>
+      <p class="lead">Minimize maintenance delays, standardize quality checklists, and verify safety compliance across shifts. Built for rugged frontline environments — 100% operational offline.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap mfg-grid">
+      <div class="reveal">
+        <div class="divider-bars" aria-hidden="true"><span></span><span></span><span></span></div>
+        <h2 style="font-size: 32px; margin-bottom: 20px;">Ditch standard forms. Run dynamic digital workflows.</h2>
+        <p style="margin-bottom: 24px; font-size: 16.5px; line-height: 1.7;">Standard templates keep teams slow. PillarOps gives operators a technical playbook. Frontline technicians log OEE, perform machine walks, and report issues instantly. If a reading goes out of spec, the system triggers alerts and notifies floor managers.</p>
+        
+        <div class="flow-mockup clip">
+          <div class="flow-step">
+            <div class="flow-badge">1</div>
+            <div class="flow-text">
+              <h4>Capture Shop-Floor Data</h4>
+              <p>Operator performs an hourly inspection walk and logs a temperature anomaly on Line B.</p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-badge">2</div>
+            <div class="flow-text">
+              <h4>Automate Response</h4>
+              <p>The system flags the anomaly, halts the workflow, and auto-dispatches an emergency work ticket to Maintenance.</p>
+            </div>
+          </div>
+          <div class="flow-step blue">
+            <div class="flow-badge">3</div>
+            <div class="flow-text">
+              <h4>Visualize OEE Live</h4>
+              <p>The anomaly, the resolution time, and the maintenance history display on the Ops Manager's live dashboard.</p>
+            </div>
+          </div>
+        </div>
+        <img src="assets/energy-tablet.png" alt="PillarOps Pipeline Inspection app screen reference photo" class="clip-sm" style="margin-top:24px; width:100%; height:280px; object-fit:cover; border:1px solid #CBD2E1; box-shadow:var(--shadow-md);">
+      </div>
+
+      <div class="reveal">
+        <div class="checklist-widget clip">
+          <div class="checklist-title">
+            <strong>Line B Start-up Checklist</strong>
+            <span class="badge active" style="font-size: 10px;">Offline Sync Enabled</span>
+          </div>
+          <div class="checklist-items">
+            <div class="checklist-row clip-sm" id="item1">
+              <div class="checklist-checkbox" onclick="toggleItem('item1')"></div>
+              <span class="checklist-label" onclick="toggleItem('item1')">Verify hydraulic pressure is at 120 PSI</span>
+            </div>
+            <div class="checklist-row clip-sm" id="item2">
+              <div class="checklist-checkbox" onclick="toggleItem('item2')"></div>
+              <span class="checklist-label" onclick="toggleItem('item2')">Inspect emergency shutoff switches</span>
+            </div>
+            <div class="checklist-row clip-sm" id="item3">
+              <div class="checklist-checkbox" onclick="toggleItem('item3')"></div>
+              <span class="checklist-label" onclick="toggleItem('item3')">Calibrate thermal sensor temperature reading</span>
+            </div>
+            <div class="checklist-row clip-sm" id="item4">
+              <div class="checklist-checkbox" onclick="toggleItem('item4')"></div>
+              <span class="checklist-label" onclick="toggleItem('item4')">Log machine OEE reading to ERP</span>
+            </div>
+          </div>
+          <div class="action-trigger clip-sm" id="alertBox">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Pressure anomaly detected! Emergency work order submitted.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-fog">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow left">— Operational Metrics —</p>
+        <h2>A plant manager's single source of truth.</h2>
+        <p>No waiting for spreadsheets at the end of the month. Watch real manufacturing KPIs update as shifts execute.</p>
+      </div>
+
+      <div class="pillars">
+        <div class="pillar-card clip reveal">
+          <span class="pillar-num">PILLAR 01 — CAPTURE</span>
+          <h3>Rugged Offline Logs</h3>
+          <p>Frontline teams enter plant checklists in dead zones. The app caches data and auto-syncs when reconnecting to Wi-Fi/LTE.</p>
+        </div>
+        <div class="pillar-card clip reveal">
+          <span class="pillar-num">PILLAR 02 — AUTOMATE</span>
+          <h3>ERP Integration</h3>
+          <p>Push shift logs directly into SAP, NetSuite, or internal database schemas. Automatically trigger parts reorders on checklist failures.</p>
+        </div>
+        <div class="pillar-card clip reveal">
+          <span class="pillar-num">PILLAR 03 — SEE</span>
+          <h3>Real-Time OEE Charts</h3>
+          <p>Keep track of line utilization, downtime codes, safety incidents, and technician dispatch response times on high-refresh screens.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band" id="demo">
+    <div class="wrap">
+      <h2>Modernize your plant floor workflows today.</h2>
+      <p>Configure a custom checklist template or pilot PillarOps on a single line in under 2 weeks.</p>
+      <a href="pricing.html#contact" class="btn btn-primary btn-lg">Deploy Pilot Checklist</a>
+    </div>
+  </section>
+</main>
+
+<footer id="company">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <img src="assets/pillarops-logo.png" alt="PillarOps">
+        <p style="margin-bottom:20px;">PillarOps helps operations teams capture accurate data, automate what happens next, and see their business clearly — wherever the work happens.</p>
+        <div class="foot-subscribe">
+          <p>Subscribe to operational updates</p>
+          <form class="foot-subscribe-form" onsubmit="handleSubscribeSubmit(event)">
+            <input type="email" class="clip-sm" placeholder="Enter your email" required id="subEmail">
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+          <div id="subSuccess" style="display:none; color:#39D353; font-size:12.5px; margin-top:8px; font-weight:600;">✓ Subscribed successfully!</div>
+        </div>
+      </div>
+      <div class="foot-col" id="product-nav">
+        <h5>Product</h5>
+        <ul>
+          <li><a href="index.html#pillars">PillarOps Platform</a></li>
+          <li><a href="solutions.html">Templates</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="foot-col" id="solutions-nav">
+        <h5>Solutions</h5>
+        <ul>
+          <li><a href="solutions.html">Industry Solutions</a></li>
+          <li><a href="manufacturing.html">Manufacturing</a></li>
+          <li><a href="solutions.html#construction">Construction</a></li>
+          <li><a href="solutions.html#healthcare">Healthcare</a></li>
+          <li><a href="solutions.html#government">Government</a></li>
+        </ul>
+      </div>
+      <div class="foot-col" id="resources-nav">
+        <h5>Resources</h5>
+        <ul>
+          <li><a href="solutions.html">Documentation</a></li>
+          <li><a href="about.html">About Us</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="pricing.html#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 PillarOps, Inc. All rights reserved.</span>
+      <span>Privacy Policy · Terms of Use</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Chatbot Widget -->
+<div class="chat-widget-wrapper">
+  <div class="chat-bubble" id="chatBubble" aria-label="Open chat assistant">
+    <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  </div>
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+      <div class="chat-header-title">
+        <span class="chat-header-status"></span>
+        PillarOps Assistant
+      </div>
+      <div class="chat-close-btn" id="chatCloseBtn">&times;</div>
+    </div>
+    <div class="chat-body" id="chatBody">
+      <div class="chat-msg bot">Hi! Welcome to PillarOps. How can I help you optimize your frontline operations today?</div>
+    </div>
+    <div class="chat-chips" id="chatChips">
+      <button class="chat-chip clip-sm" onclick="sendQuickMessage('Book a Demo')">Book a Demo</button>
+      <button class="chat-chip clip-sm" onclick="sendQuickMessage('Careers')">Careers</button>
+      <button class="chat-chip clip-sm" onclick="sendQuickMessage('Contact Office')">Contact Office</button>
+    </div>
+    <form class="chat-footer" id="chatForm" onsubmit="handleChatSubmit(event)">
+      <input type="text" class="chat-input clip-sm" id="chatInput" placeholder="Type a message..." required autocomplete="off">
+      <button type="submit" class="chat-send-btn clip-sm" aria-label="Send message">
+        <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Intersection Observer for scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { 
+      if (e.isIntersecting) { 
+        e.target.classList.add('in'); 
+        io.unobserve(e.target); 
+      } 
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Responsive Mobile Menu
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+
+  // Close nav menu on link click
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menuToggle.classList.remove('open');
+      navLinks.classList.remove('open');
+    });
+  });
+
+  // Interactive Checklist Logic
+  function toggleItem(id) {
+    const row = document.getElementById(id);
+    row.classList.toggle('checked');
+
+    const alertBox = document.getElementById('alertBox');
+    if (id === 'item1') {
+      if (row.classList.contains('checked')) {
+        alertBox.style.display = 'flex';
+      } else {
+        alertBox.style.display = 'none';
+      }
+    }
+  }
+
+  // Newsletter Subscription Form Logic
+  function handleSubscribeSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const successMsg = document.getElementById('subSuccess');
+    form.style.display = 'none';
+    successMsg.style.display = 'block';
+  }
+
+  // Chatbot Widget Logic
+  const chatBubble = document.getElementById('chatBubble');
+  const chatWindow = document.getElementById('chatWindow');
+  const chatCloseBtn = document.getElementById('chatCloseBtn');
+  const chatBody = document.getElementById('chatBody');
+  const chatInput = document.getElementById('chatInput');
+
+  chatBubble.addEventListener('click', () => {
+    chatWindow.classList.add('open');
+  });
+
+  chatCloseBtn.addEventListener('click', () => {
+    chatWindow.classList.remove('open');
+  });
+
+  function appendChatMessage(sender, text) {
+    const msg = document.createElement('div');
+    msg.classList.add('chat-msg', sender);
+    msg.textContent = text;
+    chatBody.appendChild(msg);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  function handleChatSubmit(e) {
+    e.preventDefault();
+    const text = chatInput.value.trim();
+    if (!text) return;
+    
+    appendChatMessage('user', text);
+    chatInput.value = '';
+    
+    setTimeout(() => {
+      respondToMessage(text);
+    }, 600);
+  }
+
+  function sendQuickMessage(text) {
+    appendChatMessage('user', text);
+    setTimeout(() => {
+      respondToMessage(text);
+    }, 600);
+  }
+
+  function respondToMessage(text) {
+    const cleanText = text.toLowerCase();
+    let reply = "I've received your request! An operations engineer will follow up soon.";
+    
+    if (cleanText.includes('demo') || cleanText.includes('book')) {
+      reply = "Excellent! You can book a demo directly through our form on the Pricing page or email us at info@pillarops.com.";
+    } else if (cleanText.includes('careers') || cleanText.includes('job') || cleanText.includes('hiring')) {
+      reply = "We're hiring! Please check our Careers page (careers.html) for active openings.";
+    } else if (cleanText.includes('contact') || cleanText.includes('address') || cleanText.includes('office') || cleanText.includes('phone') || cleanText.includes('tamil')) {
+      reply = "Our team serves clients globally through remote and enterprise delivery models. Reach us at info@pillarops.com or call +91 9080887340.";
+    }
+    
+    appendChatMessage('bot', reply);
+  }
+</script>
+
+</body>
+</html>

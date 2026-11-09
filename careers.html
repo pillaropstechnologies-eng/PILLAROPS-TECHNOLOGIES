@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Careers at PillarOps Technologies Private Limited — Shape Operational Software</title>
+  <meta name="description" content="Explore career opportunities at PillarOps Technologies Private Limited. Build offline-first, rugged corporate systems for manufacturing, energy, and service teams.">
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    /* Careers specific styling */
+    .jobs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .job-card {
+      background: var(--white);
+      border: 1px solid #E7EAF0;
+      padding: 38px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    }
+    .job-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--blue-light);
+    }
+    .job-details h3 {
+      font-size: 22px;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .job-meta {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12.5px;
+      color: var(--blue);
+      margin-bottom: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      display: flex;
+      gap: 16px;
+    }
+    .job-details p {
+      font-size: 15px;
+      max-width: 620px;
+      line-height: 1.6;
+    }
+    
+    /* Apply Section */
+    .apply-container {
+      background: var(--fog);
+      margin-top: 80px;
+      padding: 64px 0;
+    }
+    .apply-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 64px;
+      align-items: flex-start;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      font-size: 14px;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 8px;
+      color: var(--navy-soft);
+    }
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--white);
+      border: 1px solid #CBD2E1;
+      color: var(--navy);
+      font-family: inherit;
+      font-size: 14.5px;
+      transition: border-color var(--transition-fast);
+    }
+    .form-control:focus {
+      border-color: var(--orange);
+      outline: none;
+    }
+    .success-msg {
+      display: none;
+      padding: 20px;
+      background: #EAF0FF;
+      color: var(--blue);
+      font-weight: 600;
+      border-left: 4px solid var(--blue);
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 980px) {
+      .job-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+      .job-card .btn {
+        width: 100%;
+      }
+      .apply-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a href="index.html" class="brand">
+      <img src="assets/pillarops-logo.png" alt="PillarOps Technologies Private Limited">
+    </a>
+    <ul class="navlinks" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      
+      <!-- Services Dropdown -->
+      <li class="nav-item-has-dropdown">
+        <a href="services.html" class="nav-dropdown-toggle">
+          Services
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </a>
+        <div class="nav-dropdown-menu">
+          <a href="services.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-overview">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Services Overview</h6>
+              <p>Full suite of energy & operations software</p>
+            </div>
+          </a>
+          <a href="services-hrms.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-hrms">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>HRMS Software</h6>
+              <p>Rosters, crew payroll & certifications</p>
+            </div>
+          </a>
+          <a href="services-crm.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-crm">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>CRM & Vendor Portal</h6>
+              <p>B2B pipeline, tenders & contracts</p>
+            </div>
+          </a>
+          <a href="services-reporting.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-reporting">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><path d="M4 20h16"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Reporting & Analytics</h6>
+              <p>Field data capture & regulatory filings</p>
+            </div>
+          </a>
+          <a href="services-accounts.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-accounts">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Accounts & Finance</h6>
+              <p>Revenue splits, JIB & cost tracking</p>
+            </div>
+          </a>
+          <a href="services-cloud.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-cloud">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Cloud Solutions</h6>
+              <p>Scalable cloud infrastructure & APIs</p>
+            </div>
+          </a>
+          <a href="services-ai.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-ai">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>AI & Advanced Analytics</h6>
+              <p>Predictive maintenance & forecasting</p>
+            </div>
+          </a>
+        </div>
+      </li>
+
+      <!-- Solutions Dropdown -->
+      <li class="nav-item-has-dropdown">
+        <a href="solutions.html" class="nav-dropdown-toggle">
+          Solutions
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </a>
+        <div class="nav-dropdown-menu">
+          <a href="solutions-oil-gas.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-oil">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Oil & Gas Upstream</h6>
+              <p>Allocation, field capture & compliance</p>
+            </div>
+          </a>
+          <a href="manufacturing.html" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-mfg">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Manufacturing</h6>
+              <p>OEE tracking, checklists & plant logs</p>
+            </div>
+          </a>
+          <a href="solutions.html#construction" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-const">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Construction & Site</h6>
+              <p>Subcontractor logs & safety inspections</p>
+            </div>
+          </a>
+          <a href="solutions.html#healthcare" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-health">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Healthcare Compliance</h6>
+              <p>Sterilization logs & clinical audits</p>
+            </div>
+          </a>
+          <a href="solutions.html#government" class="dropdown-link">
+            <div class="theme-icon-badge theme-icon-govt">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+            </div>
+            <div class="dropdown-link-text">
+              <h6>Government & Municipal</h6>
+              <p>Asset audits & public facility logs</p>
+            </div>
+          </a>
+        </div>
+      </li>
+
+      <li><a href="why-pillarops.html">Why PillarOps</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="careers.html" class="active">Careers</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="contact.html" class="btn-ghost">Contact Sales</a>
+      <a href="contact.html" class="btn btn-primary">Book a Demo</a>
+    </div>
+    <button class="menu-toggle" aria-label="Toggle Navigation" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+</header>
+
+<main>
+  <section class="subpage-hero">
+    <div class="wrap">
+      <p class="eyebrow left">— Join Our Team —</p>
+      <h1>Shape the future of frontline operations.</h1>
+      <p class="lead">We are developers, product designers, and operations specialists building rugged corporate software for plants and fields across the globe.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow left">— Open Opportunities —</p>
+        <h2>Work with us to make frontline operations reliable.</h2>
+      </div>
+
+      <div class="jobs-list">
+        <!-- Job 1 -->
+        <div class="job-card clip reveal">
+          <div class="job-details">
+            <div class="job-meta">
+              <span>Engineering</span>
+              <span>•</span>
+              <span>Full-Time</span>
+              <span>•</span>
+              <span>Remote / India HQ</span>
+            </div>
+            <h3>Mobile Software Engineer (React Native / Swift)</h3>
+            <p>Design offline-first mobile databases, implement local synchronization pipelines, and build rich responsive checklists suitable for extreme physical work environments.</p>
+          </div>
+          <a href="#apply" class="btn btn-secondary" onclick="selectRole('Mobile Software Engineer (React Native / Swift)')">Apply Now</a>
+        </div>
+
+        <!-- Job 2 -->
+        <div class="job-card clip reveal">
+          <div class="job-details">
+            <div class="job-meta">
+              <span>Solutions</span>
+              <span>•</span>
+              <span>Full-Time</span>
+              <span>•</span>
+              <span>Global Remote / Hybrid</span>
+            </div>
+            <h3>Operations Solutions Engineer</h3>
+            <p>Bridge client workflows and backend systems. Build database connections (SAP, NetSuite), deploy specific manufacturing/CRM checklist rules, and lead pilot plants.</p>
+          </div>
+          <a href="#apply" class="btn btn-secondary" onclick="selectRole('Operations Solutions Engineer')">Apply Now</a>
+        </div>
+
+        <!-- Job 3 -->
+        <div class="job-card clip reveal">
+          <div class="job-details">
+            <div class="job-meta">
+              <span>Design</span>
+              <span>•</span>
+              <span>Full-Time</span>
+              <span>•</span>
+              <span>Remote / Worldwide</span>
+            </div>
+            <h3>Product Designer (Frontline UX)</h3>
+            <p>Optimize high-contrast layouts, custom touch targets, and speech-to-text input paths for industrial workers who use smartphones wearing heavy protective gloves.</p>
+          </div>
+          <a href="#apply" class="btn btn-secondary" onclick="selectRole('Product Designer (Frontline UX)')">Apply Now</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Apply Section -->
+  <section class="apply-container" id="apply">
+    <div class="wrap apply-grid">
+      <div class="reveal">
+        <div class="divider-bars" aria-hidden="true"><span></span><span></span><span></span></div>
+        <h2 style="font-size:32px; margin-bottom: 18px;">Submit your profile.</h2>
+        <p style="font-size:16px; line-height: 1.65; margin-bottom: 24px;">Don't see a matching position? Submit your CV to our general talent pool. We review incoming profiles daily for future dispatches.</p>
+        <p style="font-size: 14.5px; font-weight: 600; color: var(--navy-soft);">Recruiting & Talent Acquisition:<br>PillarOps Technologies Private Limited<br>Global Remote & Hybrid Engineering<br>Email: careers@pillarops.com</p>
+      </div>
+
+      <div class="reveal">
+        <div class="success-msg clip-sm" id="successMsg">
+          ✓ Application submitted successfully! Our recruiting team will follow up soon.
+        </div>
+        <form class="checklist-widget clip" id="applyForm" onsubmit="handleApplySubmit(event)">
+          <div class="form-group">
+            <label for="applyRole">Target Position</label>
+            <select class="form-control clip-sm" id="applyRole" required>
+              <option value="Mobile Software Engineer (React Native / Swift)">Mobile Software Engineer (React Native / Swift)</option>
+              <option value="Operations Solutions Engineer">Operations Solutions Engineer</option>
+              <option value="Product Designer (Frontline UX)">Product Designer (Frontline UX)</option>
+              <option value="General Application">General Talent Pool / Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" class="form-control clip-sm" id="fullName" required>
+          </div>
+          <div class="form-group">
+            <label for="emailAddr">Email Address</label>
+            <input type="email" class="form-control clip-sm" id="emailAddr" required>
+          </div>
+          <div class="form-group">
+            <label for="resumeLink">Resume / LinkedIn Profile Link</label>
+            <input type="url" class="form-control clip-sm" id="resumeLink" placeholder="https://" required>
+          </div>
+          <button type="submit" class="btn btn-primary" style="margin-top: 14px; width: 100%;">Submit Application</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="company">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <img src="assets/pillarops-logo.png" alt="PillarOps Technologies Private Limited">
+        <p style="margin-bottom:20px;">PillarOps Technologies Private Limited helps operations teams capture accurate data, automate what happens next, and see their business clearly — wherever the work happens.</p>
+        <div class="foot-subscribe">
+          <p>Subscribe to operational updates</p>
+          <form class="foot-subscribe-form" onsubmit="handleSubscribeSubmit(event)">
+            <input type="email" class="clip-sm" placeholder="Enter your email" required id="subEmail">
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+          <div id="subSuccess" style="display:none; color:#39D353; font-size:12.5px; margin-top:8px; font-weight:600;">✓ Subscribed successfully!</div>
+        </div>
+      </div>
+      <div class="foot-col" id="product-nav">
+        <h5>Product</h5>
+        <ul>
+          <li><a href="index.html#pillars">PillarOps Platform</a></li>
+          <li><a href="solutions.html">Templates</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="foot-col" id="solutions-nav">
+        <h5>Solutions</h5>
+        <ul>
+          <li><a href="solutions.html">Industry Solutions</a></li>
+          <li><a href="manufacturing.html">Manufacturing</a></li>
+          <li><a href="solutions.html#construction">Construction</a></li>
+          <li><a href="solutions.html#healthcare">Healthcare</a></li>
+          <li><a href="solutions.html#government">Government</a></li>
+        </ul>
+      </div>
+      <div class="foot-col" id="resources-nav">
+        <h5>Resources</h5>
+        <ul>
+          <li><a href="solutions.html">Documentation</a></li>
+          <li><a href="about.html">About Us</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="pricing.html#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 PillarOps Technologies Private Limited. All rights reserved.</span>
+      <span>Privacy Policy · Terms of Use</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Chatbot Widget -->
+<div class="chat-widget-wrapper">
+  <div class="chat-bubble" id="chatBubble" aria-label="Open chat assistant">
+    <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  </div>
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+      <div class="chat-header-title">
+        <span class="chat-header-status"></span>
+        PillarOps Assistant
+      </div>
+      <div class="chat-close-btn" id="chatCloseBtn">&times;</div>
+    </div>
+    <div class="chat-body" id="chatBody">
+      <div class="chat-msg bot">Hi! Welcome to PillarOps. How can I help you optimize your frontline operations today?</div>
+    </div>
+    <div class="chat-chips" id="chatChips">
+      <button class="chat-chip clip-sm" onclick="sendQuickMessage('Book a Demo')">Book a Demo</button>
+      <button class="chat-chip clip-sm" onclick="sendQuickMessage('Careers')">Careers</button>
+      <button class="chat-chip clip-sm" onclick="sendQuickMessage('Contact Office')">Contact Office</button>
+    </div>
+    <form class="chat-footer" id="chatForm" onsubmit="handleChatSubmit(event)">
+      <input type="text" class="chat-input clip-sm" id="chatInput" placeholder="Type a message..." required autocomplete="off">
+      <button type="submit" class="chat-send-btn clip-sm" aria-label="Send message">
+        <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Intersection Observer for scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { 
+      if (e.isIntersecting) { 
+        e.target.classList.add('in'); 
+        io.unobserve(e.target); 
+      } 
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Responsive Mobile Menu
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+
+  // Close nav menu on link click
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menuToggle.classList.remove('open');
+      navLinks.classList.remove('open');
+    });
+  });
+
+  // Select Role function for apply form
+  function selectRole(roleName) {
+    const dropdown = document.getElementById('applyRole');
+    dropdown.value = roleName;
+  }
+
+  // Handle Apply Form Submit
+  function handleApplySubmit(e) {
+    e.preventDefault();
+    const form = document.getElementById('applyForm');
+    const successMsg = document.getElementById('successMsg');
+    form.style.display = 'none';
+    successMsg.style.display = 'block';
+  }
+
+  // Newsletter Subscription Form Logic
+  function handleSubscribeSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const successMsg = document.getElementById('subSuccess');
+    form.style.display = 'none';
+    successMsg.style.display = 'block';
+  }
+
+  // Chatbot Widget Logic
+  const chatBubble = document.getElementById('chatBubble');
+  const chatWindow = document.getElementById('chatWindow');
+  const chatCloseBtn = document.getElementById('chatCloseBtn');
+  const chatBody = document.getElementById('chatBody');
+  const chatInput = document.getElementById('chatInput');
+
+  chatBubble.addEventListener('click', () => {
+    chatWindow.classList.add('open');
+  });
+
+  chatCloseBtn.addEventListener('click', () => {
+    chatWindow.classList.remove('open');
+  });
+
+  function appendChatMessage(sender, text) {
+    const msg = document.createElement('div');
+    msg.classList.add('chat-msg', sender);
+    msg.textContent = text;
+    chatBody.appendChild(msg);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  function handleChatSubmit(e) {
+    e.preventDefault();
+    const text = chatInput.value.trim();
+    if (!text) return;
+    
+    appendChatMessage('user', text);
+    chatInput.value = '';
+    
+    setTimeout(() => {
+      respondToMessage(text);
+    }, 600);
+  }
+
+  function sendQuickMessage(text) {
+    appendChatMessage('user', text);
+    setTimeout(() => {
+      respondToMessage(text);
+    }, 600);
+  }
+
+  function respondToMessage(text) {
+    const cleanText = text.toLowerCase();
+    let reply = "I've received your request! An operations engineer will follow up soon.";
+    
+    if (cleanText.includes('demo') || cleanText.includes('book')) {
+      reply = "Excellent! You can book a demo directly through our form on the Pricing page or email us at info@pillarops.com.";
+    } else if (cleanText.includes('careers') || cleanText.includes('job') || cleanText.includes('hiring')) {
+      reply = "We're hiring! Please check our Careers page (careers.html) for active openings.";
+    } else if (cleanText.includes('contact') || cleanText.includes('address') || cleanText.includes('office') || cleanText.includes('phone') || cleanText.includes('tamil')) {
+      reply = "Our team serves clients globally through remote and enterprise delivery models. Reach us at info@pillarops.com or call +91 9080887340.";
+    }
+    
+    appendChatMessage('bot', reply);
+  }
+</script>
+
+</body>
+</html>
